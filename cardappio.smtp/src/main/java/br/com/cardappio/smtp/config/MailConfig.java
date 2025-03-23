@@ -22,11 +22,12 @@ public class MailConfig {
         mailSender.setUsername(dotenv.get("MAIL_USERNAME"));
         mailSender.setPassword(dotenv.get("MAIL_PASSWORD"));
 
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.starttls.required", "true");
-        props.put("mail.smtp.ssl.trust", dotenv.get("MAIL_HOST"));
+        Properties properties = mailSender.getJavaMailProperties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.starttls.required", "true");
+        properties.put("mail.smtp.ssl.trust", dotenv.get("MAIL_HOST"));
+        properties.put("mail.smtp.from", dotenv.get("MAIL_USERNAME"));
 
         return mailSender;
     }

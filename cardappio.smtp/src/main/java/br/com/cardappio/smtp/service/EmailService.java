@@ -18,20 +18,18 @@ public class EmailService {
 
     public void sendEmail(EmailRequest request) throws MessagingException {
 
-        MimeMessage message = getMessage(request);
+        MimeMessage message = buildEmailMessage(request);
 
         sender.send(message);
-
     }
 
-    private MimeMessage getMessage(EmailRequest request) throws MessagingException {
+    private MimeMessage buildEmailMessage(EmailRequest request) throws MessagingException {
         MimeMessage mensagem = sender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mensagem, true, StandardCharsets.UTF_8.name());
         helper.setTo(request.receiver());
         helper.setSubject(request.subject());
         helper.setText(request.content());
-        helper.setFrom("trabalhosti7s@gmail.com");
 
         return mensagem;
     }
